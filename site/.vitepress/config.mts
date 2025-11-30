@@ -1,28 +1,84 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig, UserConfig } from "vitepress";
+import { withSidebar } from "vitepress-sidebar";
 
-// https://vitepress.dev/reference/site-config
-export default defineConfig({
+const vitePressOptions: UserConfig = {
   title: "Montanari News",
   description: "A VitePress Site",
+  lastUpdated: true,
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
-    nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
-    ],
-
-    sidebar: [
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
-        ]
-      }
-    ],
+    nav: [{ text: "Home", link: "/" }],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
-    ]
-  }
-})
+      {
+        icon: "github",
+        link: "https://github.com/StudentiMontanari/StudentiMontanari.github.io",
+      },
+    ],
+
+    search: {
+      provider: "local",
+      options: {
+        locales: {
+          root: {
+            translations: {
+              button: {
+                buttonText: "Cerca",
+                buttonAriaLabel: "Cerca",
+              },
+              modal: {
+                displayDetails: "Mostra dettagli",
+                resetButtonTitle: "Resetta",
+                backButtonTitle: "Indietro",
+                noResultsText: "Nessun risultato per",
+                footer: {
+                  selectText: "per selezionare",
+                  selectKeyAriaLabel: "invio",
+                  navigateText: "per navigare",
+                  navigateUpKeyAriaLabel: "su",
+                  navigateDownKeyAriaLabel: "giù",
+                  closeText: "per chiudere",
+                  closeKeyAriaLabel: "esc",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+
+    lastUpdated: { text: "Ultimo aggiornamento" },
+
+    outline: {
+      label: "In questa pagina",
+    },
+
+    docFooter: {
+      prev: "Pagina precedente",
+      next: "Pagina successiva",
+    },
+
+    darkModeSwitchLabel: "Tema",
+    darkModeSwitchTitle: "Cambia in tema scuro",
+    lightModeSwitchTitle: "Cambia in tema chiaro",
+    returnToTopLabel: "Torna all'inizio",
+    skipToContent: "Vai al contenuto",
+  },
+};
+
+const vitePressSidebarOptions = [
+  {
+    documentRootPath: "site",
+    //scanStartPath: "server",
+    //resolvePath: "/server/",
+    useTitleFromFrontmatter: true,
+    useTitleFromFileHeading: true,
+    collapsed: true,
+    useFolderTitleFromIndexFile: true,
+    useFolderLinkFromIndexFile: true,
+    sortMenusByFrontmatterOrder: true,
+  },
+];
+
+export default defineConfig(
+  withSidebar(vitePressOptions, vitePressSidebarOptions),
+);
